@@ -1,18 +1,18 @@
-import React, { useEffect } from 'react';
-import useDeviceDetect from '../../hooks/useDeviceDetect';
-import Head from 'next/head';
-import Top from '../Top';
-import Footer from '../Footer';
-import { Stack } from '@mui/material';
-import FiberContainer from '../common/FiberContainer';
-import HeaderFilter from '../homepage/HeaderFilter';
-import { userVar } from '../../../apollo/store';
-import { useReactiveVar } from '@apollo/client';
-import { getJwtToken, updateUserInfo } from '../../auth';
-import Chat from '../Chat';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
+import React, { useEffect } from "react";
+import useDeviceDetect from "../../hooks/useDeviceDetect";
+import Head from "next/head";
+import Top from "../Top";
+import Footer from "../Footer";
+import { Stack } from "@mui/material";
+import FiberContainer from "../common/FiberContainer";
+import HeaderFilter from "../homepage/HeaderFilter";
+import { userVar } from "../../../apollo/store";
+import { useReactiveVar } from "@apollo/client";
+import { getJwtToken, updateUserInfo } from "../../auth";
+import Chat from "../Chat";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 const withLayoutMain = (Component: any) => {
 	return (props: any) => {
@@ -27,23 +27,23 @@ const withLayoutMain = (Component: any) => {
 
 		/** HANDLERS **/
 
-		if (device == 'mobile') {
+		if (device == "mobile") {
 			return (
 				<>
 					<Head>
 						<title>Nestar</title>
-						<meta name={'title'} content={`Nestar`} />
+						<meta name={"title"} content={`Nestar`} />
 					</Head>
 					<Stack id="mobile-wrap">
-						<Stack id={'top'}>
+						<Stack id={"top"}>
 							<Top />
 						</Stack>
 
-						<Stack id={'main'}>
+						<Stack id={"main"}>
 							<Component {...props} />
 						</Stack>
 
-						<Stack id={'footer'}>
+						<Stack id={"footer"}>
 							<Footer />
 						</Stack>
 					</Stack>
@@ -54,27 +54,27 @@ const withLayoutMain = (Component: any) => {
 				<>
 					<Head>
 						<title>Nestar</title>
-						<meta name={'title'} content={`Nestar`} />
+						<meta name={"title"} content={`Nestar`} />
 					</Head>
 					<Stack id="pc-wrap">
-						<Stack id={'top'}>
+						<Stack id={"top"}>
 							<Top />
 						</Stack>
 
-						<Stack className={'header-main'}>
+						<Stack className={"header-main"}>
 							<FiberContainer />
-							<Stack className={'container'}>
+							<Stack className={"container"}>
 								<HeaderFilter />
 							</Stack>
 						</Stack>
 
-						<Stack id={'main'}>
+						<Stack id={"main"}>
 							<Component {...props} />
 						</Stack>
 
 						{user?._id && <Chat />}
 
-						<Stack id={'footer'}>
+						<Stack id={"footer"}>
 							<Footer />
 						</Stack>
 					</Stack>
