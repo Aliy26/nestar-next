@@ -92,7 +92,10 @@ const TrendProperties = (props: TrendPropertiesProps) => {
                       key={property._id}
                       className={"trend-property-slide"}
                     >
-                      {/* <TrendPropertyCard property={property} /> */}
+                      <TrendPropertyCard
+                        property={property}
+                        likePropertyHandler={likePropertyHandler}
+                      />
                     </SwiperSlide>
                   );
                 })}

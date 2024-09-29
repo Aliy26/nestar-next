@@ -82,7 +82,10 @@ const TopProperties = (props: TopPropertiesProps) => {
                     className={"top-property-slide"}
                     key={property?._id}
                   >
-                    {/* <TopPropertyCard property={property} /> */}
+                    <TopPropertyCard
+                      property={property}
+                      likePropertyHandler={likePropertyHandler}
+                    />
                   </SwiperSlide>
                 );
               })}
