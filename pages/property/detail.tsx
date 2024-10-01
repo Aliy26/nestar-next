@@ -31,7 +31,11 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import "swiper/css";
 import "swiper/css/pagination";
 import { T } from "../../libs/types/common";
-import { GET_PROPERTIES, GET_PROPERTY } from "../../apollo/user/query";
+import {
+  GET_COMMENTS,
+  GET_PROPERTIES,
+  GET_PROPERTY,
+} from "../../apollo/user/query";
 import { Direction, Message } from "../../libs/enums/common.enum";
 import { LIKE_TARGET_PROPERTY } from "../../apollo/user/mutation";
 import {
@@ -101,7 +105,9 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
         sort: "createdAt",
         direction: Direction.DESC,
         search: {
-          locationList: [property?.propertyLocation],
+          locationList: property?.propertyLocation
+            ? [property.propertyLocation]
+            : [],
         },
       },
     },
@@ -110,6 +116,22 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
     onCompleted: (data: T) => {
       if (data?.getProperties?.list)
         setDestinationProperties(data?.getProperties?.list);
+    },
+  });
+
+  const {
+    loading: getCommentsLoading,
+    data: getCommentsData,
+    error: getCommentsError,
+    refetch: getCommentsRefetch,
+  } = useQuery(GET_COMMENTS, {
+    fetchPolicy: "network-only",
+    variables: { input: initialComment },
+    skip: !commentInquiry.search.commentRefId,
+    notifyOnNetworkStatusChange: true,
+    onCompleted: (data: T) => {
+      if (data?.getComments?.list) setPropertyComments(data?.getComments?.list);
+      setCommentTotal(data?.getComments?.metaCounter[0]?.total ?? 0);
     },
   });
 
@@ -130,7 +152,11 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
     }
   }, [router]);
 
-  useEffect(() => {}, [commentInquiry]);
+  useEffect(() => {
+    if (commentInquiry.search.commentRefId) {
+      getCommentsRefetch({ input: commentInquiry });
+    }
+  }, [commentInquiry]);
 
   /** HANDLERS **/
   const changeImageHandler = (image: string) => {
@@ -156,7 +182,9 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
           sort: "createdAt",
           direction: Direction.DESC,
           search: {
-            locationList: [property?.propertyLocation],
+            locationList: property?.propertyLocation
+              ? [property.propertyLocation]
+              : [],
           },
         },
       });
