@@ -37,8 +37,12 @@ import {
   GET_PROPERTY,
 } from "../../apollo/user/query";
 import { Direction, Message } from "../../libs/enums/common.enum";
-import { LIKE_TARGET_PROPERTY } from "../../apollo/user/mutation";
 import {
+  CREATE_COMMENT,
+  LIKE_TARGET_PROPERTY,
+} from "../../apollo/user/mutation";
+import {
+  sweetErrorHandling,
   sweetMixinErrorAlert,
   sweetTopSmallSuccessAlert,
 } from "../../libs/sweetAlert";
@@ -74,6 +78,7 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
   /** APOLLO REQUESTS **/
 
   const [likeTargetProperty] = useMutation(LIKE_TARGET_PROPERTY);
+  const [createComment] = useMutation(CREATE_COMMENT);
 
   const {
     loading: getPropertyLoading,
@@ -201,6 +206,20 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
   ) => {
     commentInquiry.page = value;
     setCommentInquiry({ ...commentInquiry });
+  };
+
+  const createCommentHandler = async () => {
+    try {
+      if (!user._id) throw new Error(Message.NOT_AUTHENTICATED);
+      await createComment({ variables: { input: insertCommentData } });
+
+      setInsertCommentData({ ...insertCommentData, commentContent: "" });
+
+      getCommentsRefetch({ input: commentInquiry });
+    } catch (err: any) {
+      console.log("Error, createCommentHandler");
+      await sweetErrorHandling(err);
+    }
   };
 
   if (device === "mobile") {
@@ -645,6 +664,7 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
                         insertCommentData.commentContent === "" ||
                         user?._id === ""
                       }
+                      onClick={createCommentHandler}
                     >
                       <Typography className={"title"}>Submit Review</Typography>
                       <svg
