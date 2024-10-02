@@ -23,6 +23,14 @@ const TrendPropertyCard = (props: TrendPropertyCardProps) => {
 
   /** HANDLERS **/
 
+  const pushDetailHandler = async (propertyId: string) => {
+    console.log("ID:", propertyId);
+    await router.push({
+      pathname: "/property/detail",
+      query: { id: propertyId },
+    });
+  };
+
   if (device === "mobile") {
     return (
       <Stack className="trend-card-box" key={property._id}>
@@ -32,11 +40,21 @@ const TrendPropertyCard = (props: TrendPropertyCardProps) => {
           style={{
             backgroundImage: `url(${REACT_APP_API_URL}/${property?.propertyImages[0]})`,
           }}
+          onClick={() => {
+            pushDetailHandler(property._id);
+          }}
         >
           <div>${property.propertyPrice}</div>
         </Box>
         <Box component={"div"} className={"info"}>
-          <strong className={"title"}>{property.propertyTitle}</strong>
+          <strong
+            className={"title"}
+            onClick={() => {
+              pushDetailHandler(property._id);
+            }}
+          >
+            {property.propertyTitle}
+          </strong>
           <p className={"desc"}>{property.propertyDesc ?? "no description"}</p>
           <div className={"options"}>
             <div>
@@ -95,11 +113,21 @@ const TrendPropertyCard = (props: TrendPropertyCardProps) => {
           style={{
             backgroundImage: `url(${REACT_APP_API_URL}/${property?.propertyImages[0]})`,
           }}
+          onClick={() => {
+            pushDetailHandler(property._id);
+          }}
         >
           <div>${property.propertyPrice}</div>
         </Box>
         <Box component={"div"} className={"info"}>
-          <strong className={"title"}>{property.propertyTitle}</strong>
+          <strong
+            className={"title"}
+            onClick={() => {
+              pushDetailHandler(property._id);
+            }}
+          >
+            {property.propertyTitle}
+          </strong>
           <p className={"desc"}>{property.propertyDesc ?? "no description"}</p>
           <div className={"options"}>
             <div>

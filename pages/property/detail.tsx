@@ -176,7 +176,6 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
 
   const likePropertyHandler = async (user: T, id: string) => {
     try {
-      console.log(user, id, "<<<<<<<");
       if (!id) return;
       if (!user._id) throw new Error(Message.NOT_AUTHENTICATED);
       // execute likeTargetProperty
