@@ -74,7 +74,7 @@ export const PropertyCard = (props: PropertyCardProps) => {
             {property.propertyAddress}
           </Typography>
           <Typography className="price">
-            <strong>${formatterStr(property?.propertyPrice)}</strong>
+            <strong>${formatterStr(property?.propertyPrice)}</strong>/
           </Typography>
         </Stack>
         <Stack className="date-box">

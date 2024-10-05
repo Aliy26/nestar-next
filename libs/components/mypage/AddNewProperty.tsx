@@ -184,7 +184,7 @@ const AddProperty = ({ initialValues, ...props }: any) => {
       });
       await sweetMixinSuccessAlert("Property has been created!");
       await router.push({
-        pathname: `/mapage`,
+        pathname: `/mypage`,
         query: {
           category: "myProperties",
         },
@@ -204,6 +204,12 @@ const AddProperty = ({ initialValues, ...props }: any) => {
         },
       });
       await sweetMixinSuccessAlert("The property has been updated!");
+      await router.push({
+        pathname: `/mypage`,
+        query: {
+          category: "myProperties",
+        },
+      });
     } catch (err: any) {
       sweetErrorHandling(err).then();
     }
