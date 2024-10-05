@@ -275,9 +275,9 @@ const AddProperty = ({ initialValues, ...props }: any) => {
                     defaultValue={insertPropertyData.propertyType || "select"}
                     value={insertPropertyData.propertyType || "select"}
                     onChange={({ target: { value } }) =>
-                      // @ts-ignore
                       setInsertPropertyData({
                         ...insertPropertyData,
+                        // @ts-ignore
                         propertyType: value,
                       })
                     }
@@ -308,9 +308,9 @@ const AddProperty = ({ initialValues, ...props }: any) => {
                     }
                     value={insertPropertyData.propertyLocation || "select"}
                     onChange={({ target: { value } }) =>
-                      // @ts-ignore
                       setInsertPropertyData({
                         ...insertPropertyData,
+                        // @ts-ignore
                         propertyLocation: value,
                       })
                     }

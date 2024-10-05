@@ -36,8 +36,8 @@ const MyPage: NextPage = () => {
   /** LIFECYCLES **/
   useEffect(() => {
     if (!user) router.push("/").then();
-    console.log(!user._id);
-  }, []);
+    console.log(!user);
+  }, [user]);
 
   /** HANDLERS **/
   const subscribeHandler = async (id: string, refetch: any, query: any) => {
