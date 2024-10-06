@@ -54,7 +54,11 @@ const RecentlyVisited: NextPage = () => {
           {recentlyVisited?.length ? (
             recentlyVisited?.map((property: Property) => {
               return (
-                <PropertyCard property={property} recentlyVisited={true} />
+                <PropertyCard
+                  property={property}
+                  recentlyVisited={true}
+                  key={property?._id}
+                />
               );
             })
           ) : (

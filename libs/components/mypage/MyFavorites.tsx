@@ -55,6 +55,9 @@ const MyFavorites: NextPage = () => {
           input: id,
         },
       });
+      await getFavoritesRefetch({
+        input: searchFavorites,
+      });
     } catch (err: any) {
       console.log("ERROR, likePropertyHandler", err.message);
       sweetMixinErrorAlert(err.message).then();
@@ -82,6 +85,7 @@ const MyFavorites: NextPage = () => {
                   property={property}
                   myFavorites={true}
                   likePropertyHandler={likePropertyHandler}
+                  key={property?._id}
                 />
               );
             })

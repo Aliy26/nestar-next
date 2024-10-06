@@ -154,6 +154,7 @@ const MyProperties: NextPage = ({ initialInput, ...props }: any) => {
                     property={property}
                     deletePropertyHandler={deletePropertyHandler}
                     updatePropertyHandler={updatePropertyHandler}
+                    key={property?._id}
                   />
                 );
               })

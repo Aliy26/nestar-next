@@ -93,7 +93,11 @@ const CommunityCard = (props: CommunityCardProps) => {
               {boardArticle?.meLiked && boardArticle?.meLiked[0]?.myFavorite ? (
                 <FavoriteIcon color={"primary"} />
               ) : (
-                <FavoriteBorderIcon />
+                <FavoriteBorderIcon
+                // onClick={() => {
+                //   likeArticleHandler({ id: boardArticle?._id });
+                // }}
+                />
               )}
             </IconButton>
             <Typography className="view-cnt">

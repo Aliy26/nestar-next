@@ -39,6 +39,7 @@ const AddProperty = ({ initialValues, ...props }: any) => {
   /** APOLLO REQUESTS **/
   const [createProperty] = useMutation(CREATE_PROPERTY);
   const [updateProperty] = useMutation(UPDATE_PROPERTY);
+  console.log(propertyType);
 
   const {
     loading: getPropertyLoading,
@@ -286,8 +287,8 @@ const AddProperty = ({ initialValues, ...props }: any) => {
                       <option selected={true} disabled={true} value={"select"}>
                         Select
                       </option>
-                      {propertyType.map((type: any) => (
-                        <option value={`${type}`} key={type}>
+                      {propertyType.map((type: any, index: number) => (
+                        <option value={`${type}`} key={index}>
                           {type}
                         </option>
                       ))}
